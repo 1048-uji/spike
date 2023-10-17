@@ -7,29 +7,36 @@ export class SpikeService {
   private readonly baseUrl = 'https://api.openrouteservice.org/v2/';
 
   async getSpike() {
-    const address = 'Castelló';
-    const geocodingUrl = `https://api.openrouteservice.org/geocode/search?api_key=${this.apiKey}&text=${address}`;
+
+    const address = 'Carrer de Sant Miquel, 61, 12130 Sant Joan de Moró, Castelló';
+    const geocodingUrl = this.baseUrl+'geocode/search';
+    
     try {
-      const geocodingResponse = await axios.get(geocodingUrl);
+      const geocodingResponse = await axios.get(geocodingUrl, {
+        params: {
+            api_key: this.apiKey,
+            text: address,
+        },
+      });
       console.log('Resultado de geocodificación:');
       console.log(geocodingResponse.data);
     } catch (error) {
       console.error(`Error al geocodificar la dirección: ${error.message}`);
     }
-
-    const coordinates = ['39.992270,-0.068564', '39.479277,-0.341976'];
-    const directionsUrl = `${this.baseUrl}directions/driving-car`;
+    
+    const start = '-0.068564,39.992270';
+    const end = '-0.341976,39.479277';
+    const directionsUrl = this.baseUrl+'directions/driving-car';
 
     try {
       const directionsResponse = await axios.get(directionsUrl, {
         params: {
           api_key: this.apiKey,
-          coordinates: coordinates,
+          start: start,
+          end: end,
         },
       });
-
-      console.log('Resultado de obtención de direcciones:');
-      console.log(directionsResponse.data);
+      
       return directionsResponse.data;
     } catch (error) {
       throw new Error(`Error fetching data from OpenRouteService: ${error.message}`);
