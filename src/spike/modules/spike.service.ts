@@ -3,7 +3,7 @@ import axios from 'axios';
 
 @Injectable()
 export class SpikeService {
-  private readonly apiKey = '5b3ce3597851110001cf62482f02da5ed6794ccc8c6774ab019ffc8d';
+  private readonly apiKey = process.env.OPENROUTE_API_KEY;
   private readonly baseUrl = 'https://api.openrouteservice.org/v2/';
 
   async getRuta() {
