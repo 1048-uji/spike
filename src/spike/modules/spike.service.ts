@@ -10,8 +10,8 @@ export class SpikeService {
 
     //Geocoding
 
-    /*const address = 'Carrer de Sant Miquel, 61, 12130 Sant Joan de Moró, Castelló';
-    const geocodingUrl = this.baseUrl+'geocode/search';
+    const address = "Carrer de Sant Miquel, 61, 12130 Sant Joan de Moró, Castelló";
+    const geocodingUrl = 'https://api.openrouteservice.org/geocode/search';
     
     try {
       const geocodingResponse = await axios.get(geocodingUrl, {
@@ -21,10 +21,10 @@ export class SpikeService {
         },
       });
       console.log('Resultado de geocodificación:');
-      console.log(geocodingResponse.data);
+      console.log(geocodingResponse.data.bbox);
     } catch (error) {
       console.error(`Error al geocodificar la dirección: ${error.message}`);
-    }*/
+    }
     
     //Routes
 
@@ -42,14 +42,9 @@ export class SpikeService {
       });
       
     const totalDistance = directionsResponse.data.features[0].properties.segments[0].distance;
-    console.log('Distancia: ' + totalDistance)
-
     const instructions = directionsResponse.data.features[0].properties.segments[0].steps;
-    instructions.forEach((instruction, index) => {
-      console.log('Instrucción ${index + 1}:', instruction);
-    });
     const coords = directionsResponse.data.features[0].geometry.coordinates;
-    console.log('Coordenadas: '+coords);
+
       return {totalDistance, instructions, coords};
     } catch (error) {
       throw new Error(`Error fetching data from OpenRouteService: ${error.message}`);
@@ -60,7 +55,7 @@ export class SpikeService {
     const urlFuelCS = 'https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/EstacionesTerrestres/FiltroProvincia/12'
     const urlCA = 'https://sedeaplicaciones.minetur.gob.es/ServiciosRESTCarburantes/PreciosCarburantes/Listados/ComunidadesAutonomas/';
     try {
-      const response = await axios.get(urlFuelCS);
+      const response = await axios.get(urlFuelAll);
       return response.data;
     } catch (error) {
       throw new Error(`Error fetching fuel prices: ${error.message}`);
