@@ -16,8 +16,8 @@ describe('SpikeController', () => {
       providers: [SpikeService],
     }).compile();
 
-    //controller = module.get<SpikeController>(SpikeController);
-    //mockService = module.get<SpikeService>(SpikeService);
+    controller = module.get<SpikeController>(SpikeController);
+    mockService = module.get<SpikeService>(SpikeService);
     axiosMock = new AxiosMockAdapter(axios);
   });
 
