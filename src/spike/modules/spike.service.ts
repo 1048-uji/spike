@@ -12,13 +12,6 @@ export class SpikeService {
 
     const address = "Carrer de Sant Miquel, 61, 12130 Sant Joan de Moró, Castelló";
     const geocodingUrl = 'https://api.openrouteservice.org/geocode/search';
-    /*try {
-      const prueba = await axios.get(`http://spike-production.up.railway.app`);
-      console.log(prueba);
-    }
-    catch(error){
-      console.error(`Error al acceder la dirección del spike: ${error.message}`);
-    }*/
 
     try {
       const geocodingResponse = await axios.get(geocodingUrl, {

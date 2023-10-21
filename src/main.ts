@@ -6,9 +6,9 @@ async function bootstrap() {
   dotenv.config();
   const app = await NestFactory.create(AppModule);
   app.enableCors({
-    origin:'fttp://localhost:5173',
-    methods:'GET,HEAD,PUT,PATCH,POST,DELETE',
-    credentials: true,
+    allowedHeaders: "*",
+    origin: "*",
+    methods: "*"
   });
   await app.listen(process.env.PORT);
   console.log(process.env.PORT)
